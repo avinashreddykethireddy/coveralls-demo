@@ -29,12 +29,7 @@ jobs:
           COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COVERALLS_PARALLEL: true
           COVERALLS_FLAG_NAME: 'Adder'
+          COVERALLS_SERVICE_JOB_ID: ${{ github.sha }}
         run: |
           go install github.com/mattn/goveralls@latest
           goveralls -coverprofile=coverage -service=github
-#  finish:
-#    needs: [test]
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Coveralls Finished
-#        run: curl "https://coveralls.io/webhook?repo_token=${{ secrets.GITHUB_TOKEN }}&repo_name=${{ github.repository }}" -d "payload[build_num]=${{ github.run_id }}&payload[status]=done"
